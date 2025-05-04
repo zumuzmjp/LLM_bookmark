@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>LLM Bookmarks</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bookmark-popup">
+  <div class="bookmark-header">
+    <h2>LLM ブックマーク</h2>
+    <button class="create-folder-btn" id="createFolder">
+      + フォルダ作成
+    </button>
+  </div>
+
+  <div class="folder-list" id="folderList">
+    <div class="folder-item active" data-folder="default">
+      <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 7v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6.93a2 2 0 0 1-1.66-.9l-.74-1.1a2 2 0 0 0-1.66-.9H5a2 2 0 0 0-2 2v1z"/>
+      </svg>
+      すべて
+    </div>
+  </div>
+
+  <div class="bookmark-list" id="bookmarkList">
+    <div class="empty-state">
+      ブックマークがありません
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

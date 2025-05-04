@@ -1,0 +1,628 @@
+/* styles.css */
+.llm-bookmark-star {
+  position: fixed;
+  top: 70px; /* 位置を下に調整 */
+  right: 16px;
+  z-index: 9999;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  pointer-events: auto; /* 確実にクリック可能に */
+}
+
+/* 無効化状態のスタイル */
+.llm-bookmark-star:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark), 
+       (prefers-color-scheme: no-preference) {
+  html.dark .llm-bookmark-star,
+  [data-theme="dark"] .llm-bookmark-star,
+  .dark .llm-bookmark-star {
+    background-color: #2d2d2d;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  html.dark .llm-bookmark-star:hover,
+  [data-theme="dark"] .llm-bookmark-star:hover,
+  .dark .llm-bookmark-star:hover {
+    background-color: #3d3d3d;
+  }
+  
+  html.dark .llm-bookmark-star svg,
+  [data-theme="dark"] .llm-bookmark-star svg,
+  .dark .llm-bookmark-star svg {
+    color: #acacac;
+  }
+  
+  html.dark .llm-bookmark-star:hover svg,
+  [data-theme="dark"] .llm-bookmark-star:hover svg,
+  .dark .llm-bookmark-star:hover svg {
+    color: #ffffff;
+  }
+}
+
+.llm-bookmark-star:hover {
+  background-color: #f7f7f7;
+  transform: scale(1.05);
+}
+
+/* アクティブ状態 */
+.llm-bookmark-star:active {
+  transform: scale(0.95);
+}
+
+.llm-bookmark-star svg {
+  width: 24px;
+  height: 24px;
+  color: #666666;
+  transition: all 0.2s ease;
+  pointer-events: none; /* SVGがクリックイベントを妨げないように */
+}
+
+.llm-bookmark-star.bookmarked svg {
+  color: #fbbf24;
+  fill: #fbbf24;
+}
+
+.llm-bookmark-star:hover svg {
+  color: #444444;
+}
+
+.llm-bookmark-star.bookmarked:hover svg {
+  color: #f59e0b;
+  fill: #f59e0b;
+}
+
+/* ポップアップのスタイル */
+.bookmark-popup {
+  width: 360px;
+  min-height: 400px;
+  max-height: 600px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.bookmark-header {
+  padding: 16px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bookmark-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #1f2937;
+}
+
+.create-folder-btn {
+  padding: 6px 12px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.create-folder-btn:hover {
+  background-color: #2563eb;
+}
+
+.folder-list {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.folder-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+.folder-item:hover {
+  background-color: #f3f4f6;
+}
+
+.folder-item.active {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.folder-icon {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.bookmark-list {
+  padding: 12px;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.bookmark-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.bookmark-item:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bookmark-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.bookmark-title {
+  font-weight: 500;
+  color: #1f2937;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.bookmark-title:hover {
+  color: #3b82f6;
+}
+
+.bookmark-date {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.bookmark-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.action-btn {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+}
+
+.edit-btn {
+  background-color: #10a37f;
+}
+
+.edit-btn:hover {
+  background-color: #0e8c6d;
+}
+
+.move-btn {
+  background-color: #3b82f6;
+}
+
+.move-btn:hover {
+  background-color: #2563eb;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 320px;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.modal-cancel {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.modal-confirm {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.modal-cancel:hover {
+  background-color: #d1d5db;
+}
+
+.modal-confirm:hover {
+  background-color: #2563eb;
+}
+
+/* Content Script用のモーダルスタイル */
+.llm-bookmark-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.llm-bookmark-modal .modal-content {
+  background-color: white;
+  padding: 24px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.llm-bookmark-modal .modal-content.dark {
+  background-color: #202123;
+  color: #ffffff;
+}
+
+.llm-bookmark-modal .modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: inherit;
+}
+
+.llm-bookmark-modal .modal-description {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.llm-bookmark-modal .modal-content.dark .modal-description {
+  color: #9ca3af;
+}
+
+.llm-bookmark-modal .modal-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  background-color: #ffffff;
+  color: #111827;
+}
+
+.llm-bookmark-modal .modal-content.dark .modal-input {
+  background-color: #2d2e30;
+  border-color: #444654;
+  color: #ffffff;
+}
+
+.llm-bookmark-modal .modal-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.llm-bookmark-modal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.llm-bookmark-modal .modal-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.llm-bookmark-modal .modal-cancel {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.llm-bookmark-modal .modal-content.dark .modal-cancel {
+  background-color: #444654;
+  color: #d1d5db;
+}
+
+.llm-bookmark-modal .modal-cancel:hover {
+  background-color: #e5e7eb;
+}
+
+.llm-bookmark-modal .modal-content.dark .modal-cancel:hover {
+  background-color: #565869;
+}
+
+.llm-bookmark-modal .modal-confirm {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.llm-bookmark-modal .modal-confirm:hover {
+  background-color: #2563eb;
+}
+
+/* フォルダ選択セクション */
+.llm-bookmark-modal .folder-selection {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.llm-bookmark-modal .modal-select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #111827;
+  cursor: pointer;
+}
+
+.llm-bookmark-modal .modal-content.dark .modal-select {
+  background-color: #2d2e30;
+  border-color: #444654;
+  color: #ffffff;
+}
+
+.llm-bookmark-modal .modal-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.llm-bookmark-modal .create-folder-btn-inline {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.llm-bookmark-modal .modal-content.dark .create-folder-btn-inline {
+  background-color: #444654;
+  border-color: #565869;
+  color: #d1d5db;
+}
+
+.llm-bookmark-modal .create-folder-btn-inline:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.llm-bookmark-modal .modal-content.dark .create-folder-btn-inline:hover {
+  background-color: #565869;
+  border-color: #6b7280;
+}
+
+/* ダークモード用の追加スタイル for popup.html */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #202123;
+    color: #ffffff;
+  }
+
+  .bookmark-header {
+    background-color: #2d2e30;
+    border-bottom-color: #444654;
+  }
+
+  .bookmark-header h2 {
+    color: #ffffff;
+  }
+
+  .create-folder-btn {
+    background-color: #10a37f;
+  }
+
+  .create-folder-btn:hover {
+    background-color: #0e8c6d;
+  }
+
+  .folder-list {
+    border-bottom-color: #444654;
+    background-color: #202123;
+  }
+
+  .folder-item {
+    color: #d1d5db;
+  }
+
+  .folder-item:hover {
+    background-color: #2d2e30;
+  }
+
+  .folder-item.active {
+    background-color: #3b3c3f;
+    color: #ffffff;
+  }
+
+  .bookmark-list {
+    background-color: #202123;
+  }
+
+  .bookmark-item {
+    background-color: #2d2e30;
+    border-color: #444654;
+  }
+
+  .bookmark-item:hover {
+    border-color: #10a37f;
+  }
+
+  .bookmark-title {
+    color: #ffffff;
+  }
+
+  .bookmark-title:hover {
+    color: #10a37f;
+  }
+
+  .bookmark-date {
+    color: #9ca3af;
+  }
+
+  .empty-state {
+    color: #9ca3af;
+  }
+
+  .modal-content {
+    background-color: #2d2e30;
+    color: #ffffff;
+  }
+
+  .modal-input {
+    background-color: #202123;
+    border-color: #444654;
+    color: #ffffff;
+  }
+
+  .modal-cancel {
+    background-color: #444654;
+    color: #d1d5db;
+  }
+
+  .modal-cancel:hover {
+    background-color: #565869;
+  }
+
+  .modal-confirm {
+    background-color: #10a37f;
+  }
+
+  .modal-confirm:hover {
+    background-color: #0e8c6d;
+  }
+
+  .move-btn {
+    background-color: #10a37f;
+  }
+
+  .move-btn:hover {
+    background-color: #0e8c6d;
+  }
+}
+
+/* サービスアイコンのスタイル */
+.bookmark-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.service-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.service-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.service-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ChatGPTアイコンの色 */
+.service-icon svg {
+  color: #10a37f;
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  .service-icon svg {
+    color: #10a37f;
+  }
+}
