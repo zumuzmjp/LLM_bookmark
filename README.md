@@ -31,7 +31,7 @@ A Chrome extension that allows you to bookmark and organize conversations from v
 ### Developer Mode Installation
 1. Clone this repository
    ```bash
-   git clone https://github.com/your-username/llm-bookmark-manager.git
+   git clone https://github.com/zumuzmjp/LLM_bookmark.git
    ```
 2. Open `chrome://extensions/` in Chrome
 3. Enable "Developer mode" in the top right
@@ -155,7 +155,7 @@ SOFTWARE.
 ### 開発者モードでインストール
 1. このリポジトリをクローン
    ```bash
-   git clone https://github.com/your-username/llm-bookmark-manager.git
+   git clone https://github.com/zumuzmjp/LLM_bookmark.git
    ```
 2. Chrome で `chrome://extensions/` を開く
 3. 右上の「デベロッパーモード」をON
