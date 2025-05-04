@@ -1,6 +1,3 @@
-# LLM_bookmark
-chrome extension of LLM boomarks 
-
 # LLM Bookmark Manager
 
 [English](#english) | [日本語](#japanese)
