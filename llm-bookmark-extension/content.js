@@ -10,6 +10,8 @@ const RETRY_DELAY = 1000;
 // LLMサービスを検出
 function detectLLMService() {
   const hostname = window.location.hostname;
+  const pathname = window.location.pathname;
+  
   if (hostname.includes('chatgpt.com')) {
     return 'chatgpt';
   } else if (hostname.includes('claude.ai')) {
@@ -18,6 +20,8 @@ function detectLLMService() {
     return 'google_ai_studio';
   } else if (hostname.includes('gemini.google.com')) {
     return 'gemini';
+  } else if (hostname.includes('x.com') && pathname.includes('/grok')) {
+    return 'grok';
   }
   return null;
 }
@@ -36,6 +40,8 @@ function isLLMConversationPage() {
   } else if (service === 'gemini') {
     return window.location.pathname.startsWith('/app/') || 
            window.location.href.includes('gemini.google.com/app/');
+  } else if (service === 'grok') {
+    return window.location.pathname.includes('/grok') && window.location.search.includes('conversation=');
   }
   return false;
 }
@@ -55,6 +61,10 @@ function extractConversationId(url) {
   } else if (service === 'gemini') {
     const match = url.match(/gemini\.google\.com\/app\/([a-zA-Z0-9]+)/);
     return match ? match[1] : null;
+  } else if (service === 'grok') {
+    const urlObj = new URL(url);
+    const conversationId = urlObj.searchParams.get('conversation');
+    return conversationId || null;
   }
   return null;
 }
@@ -205,6 +215,41 @@ function getChatTitle() {
         }
       }
     }
+  } else if (service === 'grok') {
+    // Grok用のタイトル取得ロジック
+    // まずはブラウザのタイトルから取得を試みる
+    const pageTitle = document.title;
+    if (pageTitle && pageTitle.includes('Grok')) {
+      const title = pageTitle.split(' - Grok')[0].trim();
+      if (title && title !== 'Grok') {
+        return title;
+      }
+    }
+
+    // 会話タイトルを探す
+    const possibleSelectors = [
+      'h1',
+      'h2',
+      '[data-testid="conversation-title"]',
+      '[data-conversation-title]',
+      '.conversation-title',
+      '[class*="title"]',
+      '[class*="heading"]',
+      '.text-2xl',
+      '.text-xl',
+      '.font-bold'
+    ];
+
+    for (const selector of possibleSelectors) {
+      const elements = document.querySelectorAll(selector);
+      for (const element of elements) {
+        const text = element.textContent.trim();
+        if (text && text.length > 3 && text.length < 200 && 
+            !text.includes('Grok') && !text.includes('X') && !text.includes('Twitter')) {
+          return text;
+        }
+      }
+    }
   }
 
   // タイトルが見つからない場合
@@ -212,7 +257,8 @@ function getChatTitle() {
     'chatgpt': 'Chat',
     'claude': 'Conversation',
     'google_ai_studio': 'Prompt',
-    'gemini': 'Chat'
+    'gemini': 'Chat',
+    'grok': 'Chat'
   };
   return `${serviceName[service] || 'Conversation'} ${conversationId ? conversationId.substring(0, 8) : 'Unknown'}`;
 }

@@ -97,7 +97,7 @@ function createBookmarkElement(bookmark) {
   div.innerHTML = `
     <div class="bookmark-content">
       <div class="bookmark-title-row">
-        <div class="service-icon" title="${bookmark.service === 'chatgpt' ? 'ChatGPT' : bookmark.service === 'claude' ? 'Claude' : bookmark.service === 'google_ai_studio' ? 'Google AI Studio' : 'Gemini'}">
+        <div class="service-icon" title="${bookmark.service === 'chatgpt' ? 'ChatGPT' : bookmark.service === 'claude' ? 'Claude' : bookmark.service === 'google_ai_studio' ? 'Google AI Studio' : bookmark.service === 'gemini' ? 'Gemini' : 'Grok'}">
           ${serviceIcon}
         </div>
         <a href="${bookmark.url}" class="bookmark-title" target="_blank">${bookmark.title}</a>
@@ -151,6 +151,10 @@ function getServiceIcon(service) {
   } else if (service === 'gemini') {
     return `
       <img src="images/gemini.png" alt="Gemini" width="16" height="16" />
+    `;
+  } else if (service === 'grok') {
+    return `
+      <img src="images/grok.png" alt="Grok" width="16" height="16" />
     `;
   }
   return '';

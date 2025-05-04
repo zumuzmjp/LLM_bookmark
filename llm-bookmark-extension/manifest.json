@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "LLM Bookmark Manager",
   "version": "1.0",
-  "description": "ChatGPT、Claude、Google AI Studio、Geminiの会話をブックマークしてフォルダで管理",
+  "description": "ChatGPT、Claude、Google AI Studio、Gemini、Grokの会話をブックマークしてフォルダで管理",
   "permissions": [
     "storage",
     "tabs"
@@ -11,14 +11,15 @@
     "https://chatgpt.com/*",
     "https://claude.ai/*",
     "https://aistudio.google.com/*",
-    "https://gemini.google.com/*"
+    "https://gemini.google.com/*",
+    "https://x.com/*"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://chatgpt.com/*", "https://claude.ai/*", "https://aistudio.google.com/*", "https://gemini.google.com/*"],
+      "matches": ["https://chatgpt.com/*", "https://claude.ai/*", "https://aistudio.google.com/*", "https://gemini.google.com/*", "https://x.com/*"],
       "js": ["content.js"],
       "css": ["styles.css"]
     }
