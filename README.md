@@ -24,10 +24,6 @@ A Chrome extension that allows you to bookmark and organize conversations from v
 
 ## Installation
 
-### From Chrome Web Store (Recommended)
-1. Visit [Chrome Web Store](link)
-2. Click "Add to Chrome"
-
 ### Developer Mode Installation
 1. Clone this repository
    ```bash
@@ -147,10 +143,6 @@ SOFTWARE.
 - Gemini (gemini.google.com)
 
 ## インストール方法
-
-### Chrome Web Store から（推奨）
-1. [Chrome Web Store](リンク) にアクセス
-2. 「Chrome に追加」をクリック
 
 ### 開発者モードでインストール
 1. このリポジトリをクローン
